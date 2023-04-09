@@ -48,12 +48,12 @@ let currentItem = 0;
 // Load initial item
 // when the window loaded, it will show this kind of stuff.
 window.addEventListener('DOMContentLoaded', function () {
-    showPerson = (currentItem)
+    showPerson()
 })
 
 // Show person based on item
-function showPerson(person){
-    const item = reviews[person];
+function showPerson(){
+    const item = reviews[currentItem];
     // img is using src.
     img.src = item.img;
     // author, job, info are using text content
@@ -66,5 +66,26 @@ function showPerson(person){
 
 nextBtn.addEventListener("click", function () {
     currentItem++;
-    showPerson(currentItem);
+    if(currentItem > reviews.length - 1){
+      currentItem = 0;
+    }
+    showPerson();
+});
+
+// Show previous person
+
+prevBtn.addEventListener("click", function () {
+  currentItem--;
+  if(currentItem < 0){
+    currentItem = reviews.length - 1;
+  }
+  showPerson();
+});
+
+// Show random person
+randomBtn.addEventListener("click", function () {
+  // this is for generating random numbers.
+   currentItem = Math.floor(Math.random() * reviews.length);
+  //  console.log(currentItem);
+   showPerson();
 });
